@@ -1,0 +1,25 @@
+.header{
+    position: fixed;
+    height:80px;
+    box-shadow: 10px -2px 20px 2px #c5c5c580;
+    background: white;
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.headerLogo{
+    height:50px;
+    margin-left: 50px;
+    border-radius: 50%;
+}
+.registerBtn{
+    margin-right: 50px;
+    background: rgb(182, 39, 13);
+    color: white;
+    padding: 10px;   
+    border-radius: 4px;
+    cursor: pointer;
+    border:none;
+}

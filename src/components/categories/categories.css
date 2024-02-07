@@ -1,0 +1,34 @@
+.categoryContainer{
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--grayLight);
+  padding: 20px 30px;
+}
+.categoryLeft span{
+  margin-right: 25px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 4px 5px;
+  transition: all 0.3s;
+
+  &:hover{
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+}
+.categoryRight button{
+  background-color: blue;
+  padding: 5px 10px;
+  color: white;
+  font-size: 15px;
+  transition: all 0.3s;
+  &:hover{
+    background-color: white;
+    color: blue;
+    cursor: pointer;
+
+    
+  }
+}

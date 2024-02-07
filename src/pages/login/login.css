@@ -1,0 +1,101 @@
+
+.loginSection{
+    display: flex;
+    flex-direction: column;  
+}
+#loginContainer {
+    display: flex;
+    /* align-items: center;
+    justify-content: center; */
+    margin-top: 80px;
+    height: calc(100vh - 80px);
+    width: 100vw;  
+}
+.loginContainerLeft{   
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;   
+}
+.loginContainerRight{
+    display: flex;
+    flex: 3;
+    /* position: fixed;
+    top: 80px;
+    right: 0;
+    left:25%;
+    bottom: 0; */
+}
+.rightImg{
+   width: 100%;
+   object-fit: cover;   
+   height: 100%;
+}
+.loginHeading {
+    margin: 5px;
+}
+.inputGroup {
+    position: relative;
+    margin-bottom: 10px;
+}
+.inputGroup input:focus {
+    border-color: #2f5174;
+}
+#loginForm {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}   
+input {
+    display: block;
+    border: 1px solid #ddd;
+    margin-top: 5px;
+    padding: 10px;
+    border-radius: 4px;
+}
+input:focus {
+    background: rgba(145, 145, 145, 0.2);
+}
+
+.inputEmail .icons,
+.inputPassword .icons,
+.inputUserName .icons,
+.inputConfirmPassword .icons{
+    top: 7px;
+    bottom: 7px;
+    margin: auto;
+    left: 10px;
+    position: absolute;
+    height: 20px;
+}
+.inputEmail input,
+.inputPassword input,
+.inputUserName input,
+.inputConfirmPassword input{
+    padding-left: 36px;
+}
+.buttonGroup button {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    background: blue;
+    color: white;
+    /* padding: 10px;    */
+    border-radius: 4px;
+    cursor: pointer;
+    border:none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+}
+#loginBtn:disabled{
+    cursor: not-allowed;
+}
+.reactloading{
+    padding: 0;
+    height: 20px;
+    display: flex;
+    margin: 0;
+}
