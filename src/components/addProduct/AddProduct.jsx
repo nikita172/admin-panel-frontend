@@ -15,7 +15,6 @@ export default function AddProduct({ setToggleModal, toggleModal, isProductAdd, 
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    setIsProductAdd(!isProductAdd);
     const data = {
       brandName: brandName,
       productType: productType,
@@ -25,6 +24,7 @@ export default function AddProduct({ setToggleModal, toggleModal, isProductAdd, 
     }
     try {
       const res = await axios.post(`${process.env.REACT_APP_API_URL}/products/add`, data);
+      setIsProductAdd(!isProductAdd);
       e.target.reset();
       setToggleModal(false);
     } catch (err) {

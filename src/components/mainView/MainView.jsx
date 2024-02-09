@@ -49,6 +49,7 @@ const MainView = ({ isProductAdd, type, category }) => {
   const [productRows, setProductRows] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [selectedData, setSelectedData] = useState(null)
+
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
@@ -65,7 +66,6 @@ const MainView = ({ isProductAdd, type, category }) => {
           })
         }
       } else {
-
         const allProducts = await axios.get(`${apiUrl}/products/get/` + category);
         if (allProducts.status) {
           allProducts.data.products.map(prod => {
