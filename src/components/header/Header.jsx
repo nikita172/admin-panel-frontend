@@ -1,7 +1,7 @@
 import React from 'react'
 import "./header.css"
 import { Link } from "react-router-dom"
-import { BellIcon } from "@chakra-ui/icons";
+import { ChatIcon } from "@chakra-ui/icons";
 import { Box, ChakraProvider } from "@chakra-ui/react";
 export default function Header({ type, notification }) {
   const logoutHandler = () => {
@@ -23,7 +23,8 @@ export default function Header({ type, notification }) {
             :
             <Box>
               <Link to="/chats">
-                <BellIcon fontSize="4xl" marginRight={10} />
+                <ChatIcon fontSize="4xl" marginRight={10} />
+
               </Link>
               <Link to="/login" >
                 <button onClick={logoutHandler} className='registerBtn' > {type} ?</button>
