@@ -23,7 +23,7 @@ export default function Header({ type, notification }) {
             :
             <Box>
               <Link to="/chats">
-                <ChatIcon fontSize="4xl" marginRight={10} />
+                <ChatIcon fontSize="2xl" marginRight={10} />
 
               </Link>
               <Link to="/login" >
