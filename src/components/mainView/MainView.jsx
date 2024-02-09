@@ -59,12 +59,11 @@ const MainView = ({ isProductAdd, type, category }) => {
           allProducts.data.products.map(prod => {
             const obj = {
               id: prod._id,
-              brandName: prod.brandName, category: prod.productType, price: prod.mrp, image: `${apiUrl}/public/images/${prod.img[0]}`, desc: prod.aboutProductShort
+              brandName: prod.brandName, category: prod.productType, price: prod.mrp, image: prod.img, desc: prod.aboutProductShort
             }
             res.push(obj)
           })
         }
-
       } else {
 
         const allProducts = await axios.get(`${apiUrl}/products/get/` + category);
@@ -72,7 +71,7 @@ const MainView = ({ isProductAdd, type, category }) => {
           allProducts.data.products.map(prod => {
             const obj = {
               id: prod._id,
-              brandName: prod.brandName, category: prod.productType, price: prod.mrp, image: `${apiUrl}/public/images/${prod.img[0]}`, desc: prod.aboutProductShort
+              brandName: prod.brandName, category: prod.productType, price: prod.mrp, image: prod.img, desc: prod.aboutProductShort
             }
             res.push(obj)
           })

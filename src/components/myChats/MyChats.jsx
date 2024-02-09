@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { ChatState } from "../../context/ChatProvider";
 import { getSender } from "../../config/ChatLogic";
 import io from "socket.io-client";
-const apiUrl = process.env.REACT_APP_API_URL;
 const ENDPOINT = "https://chatbot-backend-xk8b.onrender.com/"
 var socket, selectedChatCompare;
 
