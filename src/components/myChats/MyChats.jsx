@@ -7,6 +7,8 @@ import { ChatState } from "../../context/ChatProvider";
 import { getSender } from "../../config/ChatLogic";
 import io from "socket.io-client";
 const ENDPOINT = "https://chatbot-backend-xk8b.onrender.com/"
+// const ENDPOINT = "http://localhost:8000/";
+
 var socket, selectedChatCompare;
 
 const MyChats = ({ fetchAgain, setFetchAgain }) => {
@@ -17,8 +19,8 @@ const MyChats = ({ fetchAgain, setFetchAgain }) => {
   } else {
     userId = JSON.parse(localStorage.getItem("userInfo"));
   }
-
   const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
+
   const toast = useToast();
   const fetchChats = async () => {
     try {

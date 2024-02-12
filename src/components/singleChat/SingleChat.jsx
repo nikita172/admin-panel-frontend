@@ -10,17 +10,22 @@ import ScrollableChat from "../scrollableChat/ScrollableChat";
 import io from "socket.io-client";
 const apiUrl = process.env.REACT_APP_API_URL;
 const ENDPOINT = "https://chatbot-backend-xk8b.onrender.com/"
+// const ENDPOINT = "http://localhost:8000/";
+
 var socket, selectedChatCompare;
+import sound from "../../assets/sound.wav";
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [newMessage, setNewMessage] = useState("");
 
-  const { selectedChat, setSelectedChat } =
+  const { selectedChat, setSelectedChat, notification, setNotification } =
     ChatState();
   const userData = JSON.parse(localStorage.getItem('userInfo'));
-
+  function play() {
+    new Audio(sound).play();
+  }
   const fetchMessages = async () => {
     if (!selectedChat) return;
     try {
@@ -76,16 +81,23 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
   useEffect(() => {
     socket.on("message received", (newMessageRecieved) => {
+      console.log(newMessageRecieved);
       setFetchAgain(!fetchAgain)
       if (!selectedChatCompare ||
         selectedChatCompare._id !== newMessageRecieved.chat._id
       ) {
+        if (!notification.includes(newMessageRecieved)) {
+          play();
+          setNotification([newMessageRecieved, ...notification]);
+          setFetchAgain(!fetchAgain);
+        }
 
       } else {
         setMessages([...messages, newMessageRecieved]);
       }
     });
   });
+
   const typingHandler = (e) => {
     setNewMessage(e.target.value);
   };

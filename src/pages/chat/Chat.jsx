@@ -4,11 +4,17 @@ import Header from '../../components/header/Header'
 import { useNavigate } from 'react-router-dom';
 import ChatBox from '../../components/chatBox/ChatBox';
 import MyChats from '../../components/myChats/MyChats';
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, Menu, MenuButton, MenuList } from '@chakra-ui/react'
+import { BellIcon } from "@chakra-ui/icons"
+import NotificationBadge from "react-notification-badge";
+import { Effect, } from "react-notification-badge"
+import { ChatState } from '../../context/ChatProvider';
 
 const Chat = () => {
   const navigate = useNavigate();
   const [fetchAgain, setFetchAgain] = useState(false);
+  const { setSelectedChat, notification, setNotification } =
+    ChatState();
   return (
     <ChakraProvider>
       <div className='chatUi'>
@@ -16,6 +22,8 @@ const Chat = () => {
         <div className="chatBackBtn" style={{ paddingTop: "100px", marginLeft: "20px" }}>
           <ArrowBackIcon onClick={() => navigate("/")} />
         </div>
+
+
         <div
           style={{
             display: "flex", justifyContent: "space-between",
