@@ -14,11 +14,9 @@ var socket, selectedChatCompare;
 const MyChats = ({ fetchAgain, setFetchAgain }) => {
   const [loggedUser, setLoggedUser] = useState();
   var userId;
-  if (JSON.parse(localStorage.getItem("adminInfo"))) {
-    userId = JSON.parse(localStorage.getItem("adminInfo"));
-  } else {
-    userId = JSON.parse(localStorage.getItem("userInfo"));
-  }
+
+  userId = JSON.parse(localStorage.getItem("userInfo"));
+
   const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
 
   const toast = useToast();
@@ -59,6 +57,7 @@ const MyChats = ({ fetchAgain, setFetchAgain }) => {
       setFetchAgain(!fetchAgain)
     })
   })
+  console.log(chats)
   return (
     <Box
       display={{ base: selectedChat ? "none" : "flex", md: "flex" }}
