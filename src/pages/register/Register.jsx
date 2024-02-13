@@ -37,7 +37,8 @@ export default function Register() {
           }, 2000)
         }
         else {
-          localStorage.setItem('userInfo', JSON.stringify(res.data.user._id))
+          console.log(res.data)
+          localStorage.setItem('userInfo', JSON.stringify(res.data.admin._id))
           navigate("/")
         }
         setError(res.data.message)

@@ -81,16 +81,17 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
   useEffect(() => {
     socket.on("message received", (newMessageRecieved) => {
-      console.log(newMessageRecieved);
+      // console.log("new msg received called")
+      // console.log(newMessageRecieved);
       setFetchAgain(!fetchAgain)
       if (!selectedChatCompare ||
         selectedChatCompare._id !== newMessageRecieved.chat._id
       ) {
-        if (!notification.includes(newMessageRecieved)) {
-          play();
-          setNotification([newMessageRecieved, ...notification]);
-          setFetchAgain(!fetchAgain);
-        }
+        // if (!notification.includes(newMessageRecieved)) {
+        //   play();
+        //   setNotification([newMessageRecieved, ...notification]);
+        //   setFetchAgain(!fetchAgain);
+        // }
 
       } else {
         setMessages([...messages, newMessageRecieved]);

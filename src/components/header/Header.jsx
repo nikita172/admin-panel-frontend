@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./header.css"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { ChatIcon } from "@chakra-ui/icons";
 import { Box, ChakraProvider, MenuItem } from "@chakra-ui/react";
 import { ChatState } from '../../context/ChatProvider';
@@ -9,14 +9,65 @@ import { BellIcon } from "@chakra-ui/icons"
 import NotificationBadge from "react-notification-badge";
 import { Effect, } from "react-notification-badge"
 import { getSender } from '../../config/ChatLogic';
+import io from "socket.io-client";
+import sound from "../../assets/sound.wav";
+import { useToast } from '@chakra-ui/react'
+import { notifyUser } from '../../notifyUser';
+const ENDPOINT = "https://chatbot-backend-xk8b.onrender.com/"
+// const ENDPOINT = "http://localhost:8000/";
+var socket;
+
 export default function Header({ type }) {
   const userData = JSON.parse(localStorage.getItem('userInfo'));
   const { selectedChat, setSelectedChat, notification, setNotification } = ChatState();
+  const toast = useToast();
+  const navigate = useNavigate();
+  const [notifMsg, setNotifMsg] = useState("");
+  const [msgId, setMsgId] = useState("");
+
+  function play() {
+    new Audio(sound).play();
+  }
+
+
 
   const logoutHandler = () => {
     localStorage.clear();
   }
 
+
+  useEffect(() => {
+    socket = io(ENDPOINT);
+    socket.on("connected", () => console.log("Connected"));
+  }, []);
+
+  useEffect(() => {
+    socket.on("message received", (newMsg) => {
+      setMsgId(newMsg._id);
+      const msg = "new message from " + newMsg.sender.username;
+      setNotifMsg(msg)
+
+      if (!notification.includes(newMsg)) {
+        // notifyUser(notifMsg)
+        play();
+
+        setNotification([newMsg, ...notification]);
+      }
+    })
+  })
+
+
+  useEffect(() => {
+    if (notifMsg) {
+      toast({
+        title: notifMsg,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "top right"
+      });
+    }
+  }, [msgId])
 
   return (
     <ChakraProvider>
@@ -27,9 +78,9 @@ export default function Header({ type }) {
             <button className='registerBtn' > {type} ?</button>
           </Link>
           : type == "Wanna Register" ?
-            // <Link to="/register" >
-            <button className='registerBtn' > {type} ?</button>
-            // </Link>
+            <Link to="/register" >
+              <button className='registerBtn' > {type} ?</button>
+            </Link>
             :
             <Box>
               <Link to="/chats">
@@ -51,6 +102,7 @@ export default function Header({ type }) {
                       onClick={() => {
                         setSelectedChat(notif.chat);
                         setNotification(notification.filter((n) => n !== notif));
+                        navigate("/chats")
                       }}
                     >
                       {notif.chat.isGroupChat

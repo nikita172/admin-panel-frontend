@@ -23,7 +23,7 @@ const MyChats = ({ fetchAgain, setFetchAgain }) => {
   const fetchChats = async () => {
     try {
       const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/chat/${userId}`);
-      // console.log(data)
+      console.log(data)
       setChats(data);
     } catch (error) {
       console.log(error)
@@ -57,7 +57,7 @@ const MyChats = ({ fetchAgain, setFetchAgain }) => {
       setFetchAgain(!fetchAgain)
     })
   })
-  console.log(chats)
+  // console.log(chats)
   return (
     <Box
       display={{ base: selectedChat ? "none" : "flex", md: "flex" }}
@@ -107,6 +107,11 @@ const MyChats = ({ fetchAgain, setFetchAgain }) => {
                 <Text>
                   {getSender(userId, chat.users)}
                 </Text>
+                {/* <Text
+                  color={"blue"}
+                >
+                  {chat.latestMessage && chat.latestMessage.content}
+                </Text> */}
               </Box>
             ))}
           </Stack>
