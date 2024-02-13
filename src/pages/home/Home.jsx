@@ -7,12 +7,13 @@ import AddProduct from '../../components/addProduct/AddProduct';
 import { Alert, AlertDescription, AlertIcon, AlertTitle, ChakraProvider, Container, Box, Button } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom';
 import ReactLoading from "react-loading"
+import { ChatState } from '../../context/ChatProvider';
 const Home = () => {
 
-  const [userResponded, setUserResponded] = useState(false)
   const [toggleModal, setToggleModal] = useState(false);
   const [isProductAdd, setIsProductAdd] = useState(false);
   const [loading, setLoading] = useState(true)
+  const { userResponded, setUserResponded } = ChatState();
   const navigate = useNavigate();
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem('userInfo'));
