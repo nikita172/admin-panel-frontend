@@ -6,8 +6,6 @@ import { Box, ChakraProvider, MenuItem } from "@chakra-ui/react";
 import { ChatState } from '../../context/ChatProvider';
 import { Menu, MenuButton, MenuList } from '@chakra-ui/react'
 import { BellIcon } from "@chakra-ui/icons"
-import NotificationBadge from "react-notification-badge";
-import { Effect, } from "react-notification-badge"
 import { getSender } from '../../config/ChatLogic';
 import io from "socket.io-client";
 import sound from "../../assets/sound.wav";
@@ -87,11 +85,12 @@ export default function Header({ type }) {
                 <ChatIcon fontSize="2xl" marginRight={5} />
               </Link>
               <Menu >
-                <MenuButton p={1} marginRight={5}>
-                  <NotificationBadge
+                <MenuButton p={1} marginRight={5} position={"relative"}>
+                  <div style={{ position: "absolute", color: "red", right: "10px", fontWeight: "bold", top: "0px", fontSize: "17px" }}>{notification.length > 0 && notification.length}</div>
+                  {/* <NotificationBadge
                     count={notification.length}
                     effect={Effect.SCALE}
-                  />
+                  /> */}
                   <BellIcon fontSize="3xl" m={1} />
                 </MenuButton>
                 <MenuList pl={2}>

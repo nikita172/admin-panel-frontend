@@ -5,9 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import ChatBox from '../../components/chatBox/ChatBox';
 import MyChats from '../../components/myChats/MyChats';
 import { ChakraProvider, Menu, MenuButton, MenuList } from '@chakra-ui/react'
-import { BellIcon } from "@chakra-ui/icons"
-import NotificationBadge from "react-notification-badge";
-import { Effect, } from "react-notification-badge"
 import { ChatState } from '../../context/ChatProvider';
 
 const Chat = () => {
