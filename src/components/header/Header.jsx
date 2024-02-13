@@ -42,6 +42,7 @@ export default function Header({ type }) {
   useEffect(() => {
     socket.on("notification received", (newMsg) => {
       setMsgId(newMsg._id);
+      console.log("new notification received")
       const msg = "new message from " + newMsg.sender.username;
       setNotifMsg(msg)
 
@@ -52,8 +53,8 @@ export default function Header({ type }) {
         setNotification([newMsg, ...notification]);
       }
     })
-  })
-  console.log(notification)
+  }, [])
+  // console.log(notification)
 
 
   useEffect(() => {
