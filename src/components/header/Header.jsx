@@ -40,7 +40,7 @@ export default function Header({ type }) {
   }, []);
 
   useEffect(() => {
-    socket.on("message received", (newMsg) => {
+    socket.on("notification received", (newMsg) => {
       setMsgId(newMsg._id);
       const msg = "new message from " + newMsg.sender.username;
       setNotifMsg(msg)
@@ -53,6 +53,7 @@ export default function Header({ type }) {
       }
     })
   })
+  console.log(notification)
 
 
   useEffect(() => {
@@ -76,9 +77,9 @@ export default function Header({ type }) {
             <button className='registerBtn' > {type} ?</button>
           </Link>
           : type == "Wanna Register" ?
-            <Link to="/register" >
-              <button className='registerBtn' > {type} ?</button>
-            </Link>
+            // <Link to="/register" >
+            <button className='registerBtn' > {type} ?</button>
+            // </Link>
             :
             <Box>
               <Link to="/chats">
@@ -86,7 +87,10 @@ export default function Header({ type }) {
               </Link>
               <Menu >
                 <MenuButton p={1} marginRight={5} position={"relative"}>
-                  <div style={{ position: "absolute", color: "red", right: "10px", fontWeight: "bold", top: "0px", fontSize: "17px" }}>{notification.length > 0 && notification.length}</div>
+                  <div style={{
+                    position: "absolute", color: "white", right: "5px", fontWeight: "bold", top: "0px", fontSize: "15px", backgroundColor: "red", borderRadius: "50%", padding: "0px 4px",
+                    display: "flex", alignItems: "center", justifyContent: "center"
+                  }}>{notification.length > 0 && notification.length}</div>
                   {/* <NotificationBadge
                     count={notification.length}
                     effect={Effect.SCALE}

@@ -33,13 +33,17 @@ const Home = () => {
         <div className='alertBox'>
           <ChakraProvider>
             <Container>
-              <Alert status="success">
-                <AlertIcon />
-                <Box>
-                  <AlertTitle>Notifications</AlertTitle>
-                  <AlertDescription>
-                    Please enable notifications.
-                  </AlertDescription>
+              <Alert status="success" display={"flex"}
+                justifyContent={'space-between'}>
+                <Box display={"flex"}>
+                  <AlertIcon />
+                  <Box>
+
+                    <AlertTitle>Notifications</AlertTitle>
+                    <AlertDescription>
+                      Please enable notifications.
+                    </AlertDescription>
+                  </Box>
                 </Box>
                 <Button colorSchema="teal" size="sm"
                   onClick={enableNotifsAndClose}>Sure!</Button>
