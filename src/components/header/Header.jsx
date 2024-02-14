@@ -7,17 +7,12 @@ import { ChatState } from '../../context/ChatProvider';
 import { Menu, MenuButton, MenuList } from '@chakra-ui/react'
 import { BellIcon } from "@chakra-ui/icons"
 import { getSender } from '../../config/ChatLogic';
-import io from "socket.io-client";
 import sound from "../../assets/sound.wav";
 import { useToast } from '@chakra-ui/react'
 import { notifyUser } from '../../notifyUser';
-const ENDPOINT = "https://chatbot-backend-xk8b.onrender.com/"
-// const ENDPOINT = "http://localhost:8000/";
-var socket;
-
 export default function Header({ type }) {
   const userData = JSON.parse(localStorage.getItem('userInfo'));
-  const { selectedChat, setSelectedChat, notification, setNotification } = ChatState();
+  const { setSelectedChat, notification, setNotification, socket } = ChatState();
   const toast = useToast();
   const navigate = useNavigate();
   const [notifMsg, setNotifMsg] = useState("");
@@ -27,34 +22,26 @@ export default function Header({ type }) {
     new Audio(sound).play();
   }
 
-
-
   const logoutHandler = () => {
     localStorage.clear();
   }
 
 
   useEffect(() => {
-    socket = io(ENDPOINT);
-    socket.on("connected", () => console.log("Connected"));
-  }, []);
-
-  useEffect(() => {
     socket.on("notification received", (newMsg) => {
-      setMsgId(newMsg._id);
       console.log("new notification received")
+      setMsgId(newMsg._id);
       const msg = "new message from " + newMsg.sender.username;
       setNotifMsg(msg)
-
       if (!notification.includes(newMsg)) {
         // notifyUser(notifMsg)
         play();
-
-        setNotification([newMsg, ...notification]);
+        setNotification((not) => [newMsg, ...not]);
       }
     })
+    return () => socket.off('notification received');
   }, [])
-  // console.log(notification)
+  console.log(notification)
 
 
   useEffect(() => {

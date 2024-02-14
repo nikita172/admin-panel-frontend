@@ -38,7 +38,6 @@ const Home = () => {
                 <Box display={"flex"}>
                   <AlertIcon />
                   <Box>
-
                     <AlertTitle>Notifications</AlertTitle>
                     <AlertDescription>
                       Please enable notifications.

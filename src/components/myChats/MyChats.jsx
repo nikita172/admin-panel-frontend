@@ -6,12 +6,13 @@ import { useEffect, useState } from "react";
 import { ChatState } from "../../context/ChatProvider";
 import { getSender } from "../../config/ChatLogic";
 import io from "socket.io-client";
-const ENDPOINT = "https://chatbot-backend-xk8b.onrender.com/"
-// const ENDPOINT = "http://localhost:8000/";
+// const ENDPOINT = "https://chatbot-backend-xk8b.onrender.com/"
+const ENDPOINT = "http://localhost:8000/";
 
 var socket, selectedChatCompare;
 
-const MyChats = ({ fetchAgain, setFetchAgain }) => {
+const MyChats = () => {
+  const [fetchAgain, setFetchAgain] = useState(false);
   const [loggedUser, setLoggedUser] = useState();
   var userId;
 
@@ -23,7 +24,6 @@ const MyChats = ({ fetchAgain, setFetchAgain }) => {
   const fetchChats = async () => {
     try {
       const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/chat/${userId}`);
-      console.log(data)
       setChats(data);
     } catch (error) {
       console.log(error)
@@ -49,7 +49,6 @@ const MyChats = ({ fetchAgain, setFetchAgain }) => {
       console.log("connected")
     })
   }, []);
-
 
   useEffect(() => {
     socket.on("new chat received", (chat) => {

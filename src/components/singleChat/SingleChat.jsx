@@ -7,12 +7,10 @@ import { ArrowBackIcon } from "@chakra-ui/icons";
 import ProfileModal from "../profileModal/ProfileModal";
 import { ChatState } from "../../context/ChatProvider";
 import ScrollableChat from "../scrollableChat/ScrollableChat";
-import io from "socket.io-client";
 const apiUrl = process.env.REACT_APP_API_URL;
-const ENDPOINT = "https://chatbot-backend-xk8b.onrender.com/"
-// const ENDPOINT = "http://localhost:8000/";
 
-var socket, selectedChatCompare;
+
+var selectedChatCompare;
 import sound from "../../assets/sound.wav";
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
@@ -20,12 +18,9 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [loading, setLoading] = useState(false);
   const [newMessage, setNewMessage] = useState("");
 
-  const { selectedChat, setSelectedChat, notification, setNotification } =
+  const { selectedChat, setSelectedChat, notification, setNotification, socket } =
     ChatState();
   const userData = JSON.parse(localStorage.getItem('userInfo'));
-  function play() {
-    new Audio(sound).play();
-  }
   const fetchMessages = async () => {
     if (!selectedChat) return;
     try {
@@ -68,10 +63,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     }
   };
 
-  useEffect(() => {
-    socket = io(ENDPOINT);
-    socket.on("connected", () => setSocketConnected(true));
-  }, []);
+  // useEffect(() => {
+  //   socket = io(ENDPOINT);
+  //   socket.on("connected", () => setSocketConnected(true));
+  // }, []);
 
 
   useEffect(() => {
@@ -81,7 +76,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
   useEffect(() => {
     socket.on("message received", (newMessageRecieved) => {
-      // console.log("new msg received called")
+      console.log("new msg received called")
       // console.log(newMessageRecieved);
       setFetchAgain(!fetchAgain)
       if (!selectedChatCompare ||
@@ -97,6 +92,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         setMessages([...messages, newMessageRecieved]);
       }
     });
+
   });
 
   const typingHandler = (e) => {
