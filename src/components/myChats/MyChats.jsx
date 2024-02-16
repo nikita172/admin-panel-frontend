@@ -2,12 +2,11 @@ import { AddIcon } from "@chakra-ui/icons";
 import { Box, Stack, Text, useToast, Button } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
-// import GroupChatModal from "./miscellaneous/GroupChatModal";
 import { ChatState } from "../../context/ChatProvider";
 import { getSender } from "../../config/ChatLogic";
 import io from "socket.io-client";
-// const ENDPOINT = "https://chatbot-backend-xk8b.onrender.com/"
-const ENDPOINT = "http://localhost:8000/";
+const ENDPOINT = "https://chatbot-backend-xk8b.onrender.com/"
+// const ENDPOINT = "http://localhost:8000/";
 
 var socket, selectedChatCompare;
 

@@ -10,10 +10,12 @@ import { getSender } from '../../config/ChatLogic';
 import sound from "../../assets/sound.wav";
 import { useToast } from '@chakra-ui/react'
 import { notifyUser } from '../../notifyUser';
+import axios from 'axios';
 export default function Header({ type }) {
   const userData = JSON.parse(localStorage.getItem('userInfo'));
   const { setSelectedChat, notification, setNotification, socket } = ChatState();
   const toast = useToast();
+  const apiUrl = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
   const [notifMsg, setNotifMsg] = useState("");
   const [msgId, setMsgId] = useState("");
@@ -56,6 +58,15 @@ export default function Header({ type }) {
     }
   }, [msgId])
 
+  const notifHandler = async (id) => {
+    const userData = JSON.parse(localStorage.getItem('userInfo'));
+    if (userData) {
+      const { data } = await axios.put(`${apiUrl}/api/notification/delete/${id}/${userData}`)
+      console.log(data)
+    }
+
+  }
+
   return (
     <ChakraProvider>
       <div className="header">
@@ -91,6 +102,7 @@ export default function Header({ type }) {
                     <MenuItem
                       key={notif._id}
                       onClick={() => {
+                        notifHandler(notif._id)
                         setSelectedChat(notif.chat);
                         setNotification(notification.filter((n) => n !== notif));
                         navigate("/chats")
@@ -98,7 +110,7 @@ export default function Header({ type }) {
                     >
                       {notif.chat.isGroupChat
                         ? `New Message in ${notif.chat.chatName}`
-                        : `New Message from ${getSender(userData, notif.chat.users)}`}
+                        : `New Message from ${notif.sender.username}`}
                     </MenuItem>
                   ))}
                 </MenuList>
